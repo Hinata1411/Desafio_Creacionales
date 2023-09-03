@@ -17,53 +17,77 @@ public class Main {
         Aplicacion app;
         Factory factory;
 
-        System.out.println("Bienvenido a el juego:");
+        System.out.println("---------BIENVENIDO AL JUEGO---------");
+        //Personajes GUERRERO O MAGO
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Elige el tipo de jugador 1 para Mago, 2 para Guerrero ");
+        System.out.println("REGLAS ");
+        System.out.println("El jugador empezará con el 100% de vida y los enemigos atacarán haciendo 20% de daño.");
+        System.out.println("---------Empieza el juego---------");
+        System.out.println("Elige el tipo de jugador: \n 1. MAGO \n 2. GUERRERO ");
         int opcionp = scanner.nextInt();
 
         FabricaPersonajes fabricaJugador;
 
         if (opcionp == 1) {
             fabricaJugador = new FabricaMago();
+            System.out.println("Haz elegido MAGO");
         } else if (opcionp == 2) {
             fabricaJugador = new FabricaGuerrero();
+            System.out.println("Haz elegido GUERRERO");
         } else {
             System.out.println("Opción no válida. Se creará un jugador por defecto.");
             fabricaJugador = new FabricaMago(); // Opción por defecto Mago
         }
         Personaje jugador = fabricaJugador.crearPersonaje();
 
-
+        //Enemigo NORMAL O JEFE
         scanner = new Scanner(System.in);
 
-        System.out.println("Elige el tipo de enemigo 1 para Normal, 2 para Jefe ");
+        System.out.println("Elige el tipo de enemigo: \n  1. NORMAL (Vida 50%) \n  2. JEFE (Vida 100%) ");
         int opcione = scanner.nextInt();
 
         FabricaEnemigos fabricaEnemigos;
 
         if (opcione == 1) {
             fabricaEnemigos = new FabricaEnemigoNormal();
+            System.out.println("Haz elegido ENEMIGO NORMAL \n");
         } else if (opcione == 2) {
             fabricaEnemigos = new FabricaEnemigoJefe();
+            System.out.println("Haz elegido JEFE \n");
         } else {
             System.out.println("Opción no válida. Se creará un Enemigo por defecto.");
             fabricaEnemigos = new FabricaEnemigoNormal(); // Opción por defecto Normal
         }
         Enemigo enemigo1 = fabricaEnemigos.crearEnemigo();
 
-        jugador.atacar();
-        enemigo1.recibirDanio(20);
+        System.out.println("---------Empieza el juego--------- \n");
 
-        enemigo1.atacar();
-        jugador.recibirDanio(10);
+        while (jugador.getVida() > 0 && enemigo1.getVida() > 0) {
 
-        jugador.atacar();
-        enemigo1.recibirDanio(50);
+            System.out.println("Ingresa la cantidad de daño hecho al enemigo (0-10)");
+            int danio = scanner.nextInt();
+            System.out.println("\n COMBATE");
+            jugador.atacar();
+            enemigo1.recibirDanio(danio);
 
-        System.out.println("Fin del juego :) ");
 
+            if (enemigo1.getVida() <= 0) {
+                System.out.println("¡GANASTE! :)\n Derrotaste al enemigo. \n");
+                break;
+            }
+            System.out.println("\n ATAQUE ENEMIGO");
+            enemigo1.atacar();
+            jugador.recibirDanio(20);
+
+            if (jugador.getVida() <= 0) {
+                System.out.println("¡GAME OVER! :( \n El Personaje ha sido derrotado. \n");
+                break;
+            }
+
+        }
+
+        System.out.println("Fin del juego");
     }
 
 }

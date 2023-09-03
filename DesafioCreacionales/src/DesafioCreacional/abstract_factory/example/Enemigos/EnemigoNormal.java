@@ -5,7 +5,7 @@ public class EnemigoNormal implements Enemigo{
     private int danio;
 
     public EnemigoNormal(){
-        this.Vida = 100;
+        this.Vida = 50;
         this.danio = 0;
     }
 
@@ -21,11 +21,15 @@ public class EnemigoNormal implements Enemigo{
 
         if (Vida <= 0){
             Vida = 0;
-            System.out.println("El Enemigo Normal ha muerto");
+            System.out.println("El ENEMIGO NORMAL ha muerto");
+            System.out.print(" ");
         } else {
-            System.out.println("El Enemigo Normal ha recibido " + danio + " de daño. Le queda de vida " + Vida);
+            System.out.println("El ENEMIGO NORMAL ha recibido " + danio + " de daño. Puntos de vida restantes " + Vida+ "\n");
         }
     }
-
+    @Override
+    public int getVida() {
+        return Vida;
+    }
 
 }

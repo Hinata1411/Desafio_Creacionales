@@ -25,5 +25,9 @@ public class Jugador implements Personaje {
             System.out.println("El personaje ha recibido " + danio + "de daño");
         }
     }
+    @Override
+    public int getVida() {
+        return Vida;
+    }
 }
 

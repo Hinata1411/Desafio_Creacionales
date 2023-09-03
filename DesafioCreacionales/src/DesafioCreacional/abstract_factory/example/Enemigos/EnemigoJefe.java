@@ -19,10 +19,15 @@ public class EnemigoJefe implements Enemigo{
 
         if (Vida <= 0){
             Vida = 0;
-            System.out.println("El Jefe ha muerto");
+            System.out.println("El JEFE ha muerto \n");
+            System.out.print(" ");
         } else {
-            System.out.println("El Jefe ha recibido " + danio + " de daño");
+            System.out.println("El JEFE ha recibido " + danio + " de daño. Puntos de vida restantes " + Vida+ "\n");
         }
     }
 
+    @Override
+    public int getVida() {
+        return Vida;
+    }
 }
